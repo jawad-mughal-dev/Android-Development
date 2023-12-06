@@ -13,4 +13,10 @@ public class productModel {
         this.discountPrice = discountPrice;
         this.ratingStar = ratingStar;
     }
+
+    public productModel(String name, String price , int image) {
+        this.name = name;
+        this.price = price;
+        this.image = image;
+    }
 }
