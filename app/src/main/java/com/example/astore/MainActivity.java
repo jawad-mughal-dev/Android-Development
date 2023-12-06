@@ -1,11 +1,16 @@
 package com.example.astore;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -21,8 +26,18 @@ public class MainActivity extends AppCompatActivity {
         // create a tool bar
         toolbar = findViewById(R.id.toolBar);
 
-        //setup 1
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        if(getSupportActionBar()!=null)
+        {
+            //setup 1
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        else {
+            Toast.makeText(this, "TOOL BAR ERROR ", Toast.LENGTH_SHORT).show();
+        }
+        toolbar.setTitle("My ToolBar");
+        toolbar.setSubtitle("Sub Title");
 
         RecyclerView recyclerView = findViewById(R.id.rvProduct);
 
@@ -44,5 +59,37 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerProductAdaptor adaptor = new RecyclerProductAdaptor(this, product);
         recyclerView.setAdapter(adaptor);
+
+
+
+
+    }
+    // setup for the create menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        new MenuInflater(this).inflate(R.menu.opt_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+
+        int itemId = item.getItemId();
+
+        if(itemId == R.id.opt_menu)
+        {
+            Toast.makeText(this, "Create Menu", Toast.LENGTH_SHORT).show();
+        }
+        else if (itemId == R.id.opt_basket)
+        {
+            Toast.makeText(this, "Create cart", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(this, "Create Person", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
